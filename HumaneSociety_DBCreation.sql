@@ -10,6 +10,54 @@ CREATE TABLE Addresses (AddressId INTEGER IDENTITY (1,1) PRIMARY KEY, AddressLin
 CREATE TABLE Clients (ClientId INTEGER IDENTITY (1,1) PRIMARY KEY, FirstName VARCHAR(50), LastName VARCHAR(50), UserName VARCHAR(50), Password VARCHAR(50), AddressId INTEGER FOREIGN KEY REFERENCES Addresses(AddressId), Email VARCHAR(50));
 CREATE TABLE Adoptions(ClientId INTEGER FOREIGN KEY REFERENCES Clients(ClientId), AnimalId INTEGER FOREIGN KEY REFERENCES Animals(AnimalId), ApprovalStatus VARCHAR(50), AdoptionFee INTEGER, PaymentCollected BIT, CONSTRAINT AdoptionId PRIMARY KEY (ClientId, AnimalId));
 
+INSERT INTO Categories VALUES ('Fire');
+INSERT INTO Categories VALUES ('Water');
+INSERT INTO Categories VALUES ('Mythical');
+INSERT INTO Categories VALUES ('Normal');
+INSERT INTO Categories VALUES ('Sickly');
+
+INSERT INTO Animals VALUES ('Blue-eyes Pink Dragon',12000, 2000,'nice', 0, 0, 'Alpha-male','pending', 3, 1, 2);
+INSERT INTO Animals VALUES ('Liger',240,24,'mean', 0, 0, 'Alpha-female','pending',4, 5, 3);
+INSERT INTO Animals VALUES ('Unicorn',2000,100000,'legendary', 1, 1, 'Alpha-female','auction', 3, 2, 5);
+INSERT INTO Animals VALUES ('Behemoth',8000, 4000,'Adamant', 0, 0, 'Alpha-male','pending',3, 3, 1);
+INSERT INTO Animals VALUES ('Charizard',3600, 36,'Jolly', 1, 1, 'Alpha-male','pending',3, 4, 4);
+
+INSERT INTO DietPlans VALUES('NomNomBacon','Carnivorous', 3);
+INSERT INTO DietPlans VALUES('VeggieSlush','herbivorous', 2);
+INSERT INTO DietPlans VALUES('MeatLoversMealPlan','Carnivorous', 3);
+INSERT INTO DietPlans VALUES('BasicLeftovers','Omnivorous', 10);
+INSERT INTO DietPlans VALUES('DelicatePaletePlates','Omnivorous', 1);
+
+
+INSERT INTO Employees VALUES ('Andrew','Malkasian','LonelyBoyForever24','coolbeans',1, 'LonelyBoyForever24@gmail.com');
+INSERT INTO Employees VALUES ('Greg','Manthey','EpicVegan','veggiesRlife',2, 'EpicVegan@gmail.com');
+INSERT INTO Employees VALUES ('Jake','Gambino','TheGreatBambino','Jgambino', 3, 'TheGreatBambino@msn.com');
+INSERT INTO Employees VALUES ('Charles','King','KingCharles4','Wifesname+kidsbirthday',4, 'KingCharles4@yahoo.com');
+INSERT INTO Employees VALUES ('Hannah','Bingham','Jakedrools','Ihateeveryone',5,'dontbotherme@onthecouch.org');
+
+INSERT INTO Clients VALUES ('Dave','Quitter','ImaQuitter','HTMLCSS',null, 'ImaQuitter@wix.com');
+INSERT INTO Clients VALUES ('Najmeel','Where','TheFoodPlace','Illbeback',null, 'TheFoodPlace@gmail.com');
+INSERT INTO Clients VALUES ('Joyce','Malkasian','YourMomHasAUserName','AndAPassWord',null, 'Jmalkasian@makarios.com');
+INSERT INTO Clients VALUES ('Bob','Barker','GameShowMaster','TheRightPrice',null, 'GameShowMaster@yahoo.com');
+INSERT INTO Clients VALUES ('Justin','Tucker','RaveMaster','upright12345',null,'RaveMaster@gmail.com');
+
+INSERT INTO Rooms VALUES (10 , 6);
+INSERT INTO Rooms VALUES (12 , 7);
+INSERT INTO Rooms VALUES (14 , 8);
+INSERT INTO Rooms VALUES (16 , 9);
+INSERT INTO Rooms VALUES (18 , 10);
+INSERT INTO Rooms VALUES (20 , null);
+INSERT INTO Rooms VALUES (22 , null);
+INSERT INTO Rooms VALUES (24 , null);
+INSERT INTO Rooms VALUES (26 , null);
+INSERT INTO Rooms VALUES (28 , null);
+
+
+
+
+
+
+
 INSERT INTO USStates VALUES('Alabama','AL');
 INSERT INTO USStates VALUES('Alaska','AK');
 INSERT INTO USStates VALUES('Arizona','AZ');
