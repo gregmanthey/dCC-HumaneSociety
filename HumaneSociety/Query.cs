@@ -208,22 +208,55 @@ namespace HumaneSociety
         // TODO: Animal CRUD Operations
         internal static void AddAnimal(Animal animal)
         {
-            throw new NotImplementedException();
+            db.Animals.InsertOnSubmit(animal);
         }
 
         internal static Animal GetAnimalByID(int id)
         {
-            throw new NotImplementedException();
+            return db.Animals.Where(a => a.AnimalId == id).Single();
         }
 
         internal static void UpdateAnimal(int animalId, Dictionary<int, string> updates)
-        {            
-            throw new NotImplementedException();
+        {
+            var animal = GetAnimalByID(animalId);
+            foreach (var item in updates)
+            {
+                updates.TryGetValue(item.Key, out string data);
+                switch (item.Key)
+                {
+                    case 1:
+                        animal.CategoryId = db.Categories.Where(c => c.Name == data).Select(c => c.CategoryId).Single();
+                        break;
+                    case 2:
+                        animal.Name = data;
+                        break;
+                    case 3:
+                        animal.Age = int.Parse(data);
+                        break;
+                    case 4:
+                        animal.Demeanor = data;
+                        break;
+                    case 5:
+                        animal.KidFriendly = bool.Parse(data);
+                        break;
+                    case 6:
+                        animal.PetFriendly = bool.Parse(data);
+                        break;
+                    case 7:
+                        animal.Weight = int.Parse(data);
+                        break;
+                    case 8:
+                        animal.AnimalId = int.Parse(data);
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
         internal static void RemoveAnimal(Animal animal)
         {
-            throw new NotImplementedException();
+            db.Animals.DeleteOnSubmit(animal);
         }
         
         // TODO: Animal Multi-Trait Search
