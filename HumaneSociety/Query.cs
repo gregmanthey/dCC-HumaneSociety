@@ -18,7 +18,7 @@ namespace HumaneSociety
         internal static List<USState> GetStates()
         {
             List<USState> allStates = db.USStates.ToList();       
-
+            ///Like a good neighbor, allStates is there...
             return allStates;
         }
             
@@ -164,10 +164,46 @@ namespace HumaneSociety
         //// TODO Items: ////
         
         // TODO: Allow any of the CRUD operations to occur here
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="employee"></param>
+        /// <param name="crudOperation"></param>
+        /// Create(Insert) , Read (Select), Update(Update), Delete(Delete)
+        /// AND & OR ops will help with this
         internal static void RunEmployeeQueries(Employee employee, string crudOperation)
         {
-            throw new NotImplementedException();
+           var cruddyEmployee = db.Employees.Where(e => e.EmployeeId == employee.EmployeeId).Single();
+        
+            switch (crudOperation)
+            {
+               case "create":
+                    db.Employees.InsertOnSubmit(employee);
+                    break;
+               case "read":
+                    Console.WriteLine(cruddyEmployee.FirstName);
+                    Console.WriteLine(cruddyEmployee.LastName);
+                    Console.WriteLine(cruddyEmployee.EmployeeNumber);
+                    Console.WriteLine(cruddyEmployee.Email);
+
+
+                    break;
+
+               case "update":
+                    cruddyEmployee.FirstName = employee.FirstName;
+                    cruddyEmployee.LastName = employee.LastName;
+                    cruddyEmployee.EmployeeNumber = employee.EmployeeNumber;
+                    cruddyEmployee.Email = employee.Email;
+
+                    break;
+               case "delete":
+                    db.Employees.DeleteOnSubmit(cruddyEmployee);
+                    break;
+                default: break;
+            }
         }
+        //clientFromDb.FirstName = clientWithUpdates.FirstName;
+        //    clientFromDb.LastName = clientWithUpdates.LastName;
 
         // TODO: Animal CRUD Operations
         internal static void AddAnimal(Animal animal)
