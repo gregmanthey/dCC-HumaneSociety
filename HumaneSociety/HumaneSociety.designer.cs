@@ -65,19 +65,18 @@ namespace HumaneSociety
     partial void DeleteUSState(USState instance);
     #endregion
 		
-		public HumaneSocietyDataContext() : 
-				base(global::HumaneSociety.Properties.Settings.Default.HumaneSocietyConnectionString4, mappingSource)
-		{
-			OnCreated();
-		}
-		
 		public HumaneSocietyDataContext(string connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public HumaneSocietyDataContext(System.Data.IDbConnection connection) : 
+        public HumaneSocietyDataContext() :
+               base(global::HumaneSociety.Properties.Settings.Default.HumaneSocietyConnectionString4, mappingSource)
+        {
+            OnCreated();
+        }
+        public HumaneSocietyDataContext(System.Data.IDbConnection connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
