@@ -22,20 +22,14 @@ namespace HumaneSociety
             UserEmployee employee;
             Admin admin;
             Console.Clear();
-            switch (input.ToLower())
+            switch (input.ToLower().Trim())
             {
                 case "customer":
-                    customer = new Customer();
-                    customer.LogIn();
-                     break;
                 case"2":
                     customer = new Customer();
                     customer.LogIn();
                     break;
                 case "employee":
-                    employee = new UserEmployee();
-                    employee.LogIn();
-                    break;
                 case "1":
                     employee = new UserEmployee();
                     employee.LogIn();
