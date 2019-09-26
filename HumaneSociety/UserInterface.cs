@@ -119,7 +119,6 @@ namespace HumaneSociety
                 Console.Clear();
                 DisplayUserOptions("Incorrect input please enter an integer number.");
                 return GetIntegerData(parameter, target);
-                
             }
         }
 

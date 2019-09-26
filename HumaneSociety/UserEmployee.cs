@@ -9,7 +9,6 @@ namespace HumaneSociety
     class UserEmployee : User
     {
         Employee employee;
-            
         
         public override void LogIn()
         {

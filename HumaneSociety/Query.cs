@@ -18,7 +18,7 @@ namespace HumaneSociety
         internal static List<USState> GetStates()
         {
             List<USState> allStates = db.USStates.ToList();       
-            ///Like a good neighbor, allStates is there...
+
             return allStates;
         }
             
@@ -162,48 +162,37 @@ namespace HumaneSociety
 
 
         //// TODO Items: ////
-        
+
         // TODO: Allow any of the CRUD operations to occur here
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="employee"></param>
-        /// <param name="crudOperation"></param>
-        /// Create(Insert) , Read (Select), Update(Update), Delete(Delete)
-        /// AND & OR ops will help with this
         internal static void RunEmployeeQueries(Employee employee, string crudOperation)
         {
-           var cruddyEmployee = db.Employees.Where(e => e.EmployeeId == employee.EmployeeId).Single();
-        
+            var cruddyEmployee = db.Employees.Where(e => e.EmployeeId == employee.EmployeeId).Single();
+
             switch (crudOperation)
             {
-               case "create":
+                case "create":
                     db.Employees.InsertOnSubmit(employee);
                     break;
-               case "read":
+                case "read":
                     Console.WriteLine(cruddyEmployee.FirstName);
                     Console.WriteLine(cruddyEmployee.LastName);
                     Console.WriteLine(cruddyEmployee.EmployeeNumber);
                     Console.WriteLine(cruddyEmployee.Email);
-
-
                     break;
 
-               case "update":
+                case "update":
                     cruddyEmployee.FirstName = employee.FirstName;
                     cruddyEmployee.LastName = employee.LastName;
                     cruddyEmployee.EmployeeNumber = employee.EmployeeNumber;
                     cruddyEmployee.Email = employee.Email;
 
                     break;
-               case "delete":
+                case "delete":
                     db.Employees.DeleteOnSubmit(cruddyEmployee);
                     break;
                 default: break;
             }
         }
-        //clientFromDb.FirstName = clientWithUpdates.FirstName;
-        //    clientFromDb.LastName = clientWithUpdates.LastName;
 
         // TODO: Animal CRUD Operations
         internal static void AddAnimal(Animal animal)
@@ -258,11 +247,11 @@ namespace HumaneSociety
         {
             db.Animals.DeleteOnSubmit(animal);
         }
-        
+
         // TODO: Animal Multi-Trait Search
         internal static IQueryable<Animal> SearchForAnimalsByMultipleTraits(Dictionary<int, string> updates) // parameter(s)?
         {
-            var animals = new List<Animal>().AsQueryable();
+            var animals = new List<Animal>();
             foreach (var item in updates)
             {
                 updates.TryGetValue(item.Key, out string data);
@@ -270,51 +259,55 @@ namespace HumaneSociety
                 {
                     case 1:
                         var foundCategoryId = db.Categories.Where(c => c.Name == data).Select(c => c.CategoryId).Single();
-                        animals = db.Animals.Where(a => a.CategoryId == foundCategoryId);
+                        animals.AddRange(db.Animals.Where(a => a.CategoryId == foundCategoryId));
                         break;
                     case 2:
-                        animals = db.Animals.Where(a => a.Name == data);
+                        animals.AddRange(db.Animals.Where(a => a.Name == data));
                         break;
                     case 3:
-                        animals = db.Animals.Where(a => a.Age == int.Parse(data));
+                        animals.AddRange(db.Animals.Where(a => a.Age == int.Parse(data)));
                         break;
                     case 4:
-                        animals = db.Animals.Where(a => a.Demeanor == data);
+                        animals.AddRange(db.Animals.Where(a => a.Demeanor == data));
                         break;
                     case 5:
-                        animals = db.Animals.Where(a => a.KidFriendly == bool.Parse(data));
+                        animals.AddRange(db.Animals.Where(a => a.KidFriendly == bool.Parse(data)));
                         break;
                     case 6:
-                        animals = db.Animals.Where(a => a.PetFriendly == bool.Parse(data));
+                        animals.AddRange(db.Animals.Where(a => a.PetFriendly == bool.Parse(data)));
                         break;
                     case 7:
-                        animals = db.Animals.Where(a => a.Weight == int.Parse(data));
+                        animals.AddRange(db.Animals.Where(a => a.Weight == int.Parse(data)));
                         break;
                     case 8:
-                        animals = db.Animals.Where(a => a.AnimalId == int.Parse(data));
+                        animals.AddRange(db.Animals.Where(a => a.AnimalId == int.Parse(data)));
                         break;
                     default:
                         break;
                 }
             }
-            return animals;
+            foreach (var item in animals)
+            {
+                Console.WriteLine($"{item.AnimalId}, {item.Name}");
+            }
+            return animals.AsQueryable();
         }
-         
+
         // TODO: Misc Animal Things
         internal static int GetCategoryId(string animalCategoryName)
         {
-            
+
             return db.Categories.Where(c => c.Name == animalCategoryName).Select(c => c.CategoryId).Single();
-          
+
             //return db.something = categoryName
             //
         }
-        
+
         internal static Room GetRoom(int animalId)
         {
             return db.Rooms.Where(r => r.AnimalId == animalId).Single();
         }
-        
+
         internal static int GetDietPlanId(string dietPlanName)
         {
             return db.DietPlans.Where(d => d.Name == dietPlanName).Select(d => d.DietPlanId).Single();
