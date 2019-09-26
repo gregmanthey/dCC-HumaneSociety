@@ -251,7 +251,7 @@ namespace HumaneSociety
         // TODO: Animal Multi-Trait Search
         internal static IQueryable<Animal> SearchForAnimalsByMultipleTraits(Dictionary<int, string> updates) // parameter(s)?
         {
-            var animals = new List<Animal>();
+            IQueryable<Animal> animals = db.Animals;
             foreach (var item in updates)
             {
                 updates.TryGetValue(item.Key, out string data);
@@ -259,28 +259,28 @@ namespace HumaneSociety
                 {
                     case 1:
                         var foundCategoryId = db.Categories.Where(c => c.Name == data).Select(c => c.CategoryId).Single();
-                        animals.AddRange(db.Animals.Where(a => a.CategoryId == foundCategoryId));
+                        animals = animals.Where(a => a.CategoryId == foundCategoryId);
                         break;
                     case 2:
-                        animals.AddRange(db.Animals.Where(a => a.Name == data));
+                        animals = animals.Where(a => a.Name == data);
                         break;
                     case 3:
-                        animals.AddRange(db.Animals.Where(a => a.Age == int.Parse(data)));
+                        animals = animals.Where(a => a.Age == int.Parse(data));
                         break;
                     case 4:
-                        animals.AddRange(db.Animals.Where(a => a.Demeanor == data));
+                        animals = animals.Where(a => a.Demeanor == data);
                         break;
                     case 5:
-                        animals.AddRange(db.Animals.Where(a => a.KidFriendly == bool.Parse(data)));
+                        animals = animals.Where(a => a.KidFriendly == bool.Parse(data));
                         break;
                     case 6:
-                        animals.AddRange(db.Animals.Where(a => a.PetFriendly == bool.Parse(data)));
+                        animals = animals.Where(a => a.PetFriendly == bool.Parse(data));
                         break;
                     case 7:
-                        animals.AddRange(db.Animals.Where(a => a.Weight == int.Parse(data)));
+                        animals = animals.Where(a => a.Weight == int.Parse(data));
                         break;
                     case 8:
-                        animals.AddRange(db.Animals.Where(a => a.AnimalId == int.Parse(data)));
+                        animals = animals.Where(a => a.AnimalId == int.Parse(data));
                         break;
                     default:
                         break;
