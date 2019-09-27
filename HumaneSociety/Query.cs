@@ -24,7 +24,7 @@ namespace HumaneSociety
             
         internal static Client GetClient(string userName, string password)
         {
-            Client client = db.Clients.Where(c => c.UserName == userName && c.Password == password).Single();
+            Client client = db.Clients.Where(c => c.UserName == userName && c.Password == password).SingleOrDefault();
 
             return client;
         }
@@ -78,7 +78,7 @@ namespace HumaneSociety
 
             try
             {
-                clientFromDb = db.Clients.Where(c => c.ClientId == clientWithUpdates.ClientId).Single();
+                clientFromDb = db.Clients.Where(c => c.ClientId == clientWithUpdates.ClientId).SingleOrDefault();
             }
             catch(InvalidOperationException e)
             {
@@ -166,12 +166,13 @@ namespace HumaneSociety
         // TODO: Allow any of the CRUD operations to occur here
         internal static void RunEmployeeQueries(Employee employee, string crudOperation)
         {
-            var cruddyEmployee = db.Employees.Where(e => e.EmployeeId == employee.EmployeeId).Single();
+            var cruddyEmployee = db.Employees.Where(e => e.EmployeeId == employee.EmployeeId).SingleOrDefault();
 
             switch (crudOperation)
             {
                 case "create":
                     db.Employees.InsertOnSubmit(employee);
+                    db.SubmitChanges();
                     break;
                 case "read":
                     Console.WriteLine(cruddyEmployee.FirstName);
@@ -189,6 +190,7 @@ namespace HumaneSociety
                     break;
                 case "delete":
                     db.Employees.DeleteOnSubmit(cruddyEmployee);
+                    db.SubmitChanges();
                     break;
                 default: break;
             }
@@ -198,11 +200,12 @@ namespace HumaneSociety
         internal static void AddAnimal(Animal animal)
         {
             db.Animals.InsertOnSubmit(animal);
+            db.SubmitChanges();
         }
 
         internal static Animal GetAnimalByID(int id)
         {
-            return db.Animals.Where(a => a.AnimalId == id).Single();
+            return db.Animals.Where(a => a.AnimalId == id).SingleOrDefault();
         }
 
         internal static void UpdateAnimal(int animalId, Dictionary<int, string> updates)
@@ -214,7 +217,7 @@ namespace HumaneSociety
                 switch (item.Key)
                 {
                     case 1:
-                        animal.CategoryId = db.Categories.Where(c => c.Name == data).Select(c => c.CategoryId).Single();
+                        animal.CategoryId = db.Categories.Where(c => c.Name == data).Select(c => c.CategoryId).SingleOrDefault();
                         break;
                     case 2:
                         animal.Name = data;
@@ -246,6 +249,7 @@ namespace HumaneSociety
         internal static void RemoveAnimal(Animal animal)
         {
             db.Animals.DeleteOnSubmit(animal);
+            db.SubmitChanges();
         }
 
         // TODO: Animal Multi-Trait Search
@@ -258,7 +262,7 @@ namespace HumaneSociety
                 switch (item.Key)
                 {
                     case 1:
-                        var foundCategoryId = db.Categories.Where(c => c.Name == data).Select(c => c.CategoryId).Single();
+                        var foundCategoryId = db.Categories.Where(c => c.Name == data).Select(c => c.CategoryId).SingleOrDefault();
                         animals = animals.Where(a => a.CategoryId == foundCategoryId);
                         break;
                     case 2:
@@ -297,7 +301,7 @@ namespace HumaneSociety
         internal static int GetCategoryId(string animalCategoryName)
         {
 
-            return db.Categories.Where(c => c.Name == animalCategoryName).Select(c => c.CategoryId).Single();
+            return db.Categories.Where(c => c.Name == animalCategoryName).Select(c => c.CategoryId).SingleOrDefault();
 
             //return db.something = categoryName
             //
@@ -305,12 +309,12 @@ namespace HumaneSociety
 
         internal static Room GetRoom(int animalId)
         {
-            return db.Rooms.Where(r => r.AnimalId == animalId).Single();
+            return db.Rooms.Where(r => r.AnimalId == animalId).SingleOrDefault();
         }
 
         internal static int GetDietPlanId(string dietPlanName)
         {
-            return db.DietPlans.Where(d => d.Name == dietPlanName).Select(d => d.DietPlanId).Single();
+            return db.DietPlans.Where(d => d.Name == dietPlanName).Select(d => d.DietPlanId).SingleOrDefault();
         }
 
         // TODO: Adoption CRUD Operations
@@ -325,6 +329,7 @@ namespace HumaneSociety
             //db.Animals.Where(a => NewAdoption.AnimalId == animal.AnimalId).SingleOrDefault().AdoptionStatus = "pending";
             animal.AdoptionStatus = "pending";
             db.Adoptions.InsertOnSubmit(NewAdoption);
+            db.SubmitChanges();
         }
 
         internal static IQueryable<Adoption> GetPendingAdoptions()
@@ -342,6 +347,7 @@ namespace HumaneSociety
         {
             var adoptionToRemove = db.Adoptions.Where(a => a.AnimalId == animalId && a.ClientId == clientId).SingleOrDefault();
             db.Adoptions.DeleteOnSubmit(adoptionToRemove);
+            db.SubmitChanges();
         }
 
         // TODO: Shots Stuff
@@ -353,8 +359,9 @@ namespace HumaneSociety
         {
             AnimalShot newAnimalShot = new AnimalShot();
             newAnimalShot.AnimalId = animal.AnimalId;
-            newAnimalShot.ShotId = db.Shots.Where(s => s.Name == shotName).Select(s => s.ShotId).Single();
+            newAnimalShot.ShotId = db.Shots.Where(s => s.Name == shotName).Select(s => s.ShotId).SingleOrDefault();
             db.AnimalShots.InsertOnSubmit(newAnimalShot);
+            db.SubmitChanges();
         }
     }
 }
