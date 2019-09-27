@@ -1,0 +1,40 @@
+INSERT INTO Employees VALUES('Jiminy', 'Cricket', 'jcricket', 'LargeAndInCharge', 62031, 'jiminy@humanesociety.org');
+INSERT INTO Employees VALUES('Jill', 'Valentine', 'jvalentine', 'NothingToSeeHere', 49613, 'jill@humanesociety.org');
+INSERT INTO Employees VALUES('Marty', 'McFly', 'mmcfly', 'ToInfinityAndBeyond', 34892, 'marty@humanesociety.org');
+INSERT INTO Employees VALUES('Tony', 'Tiger', 'ttiger', 'TheyyyyyyyyreGreat!', 1993, 'tony@humanesociety.org');
+INSERT INTO Employees VALUES('Misty', 'Fey', 'mfey', 'password1', 61324, 'misty@humanesociety.org');
+
+INSERT INTO Categories VALUES('Amphibious');
+INSERT INTO Categories VALUES('Winged');
+INSERT INTO Categories VALUES('Landlubber');
+INSERT INTO Categories VALUES('Mammal');
+INSERT INTO Categories VALUES('Underwater');
+
+INSERT INTO DietPlans VALUES('Carnivore', 'Meat, meat, and more meat', 7);
+INSERT INTO DietPlans VALUES('Omnivore', 'Meat, veggies, curds and whey', 10);
+INSERT INTO DietPlans VALUES('Herbivore', 'Lots of green', 20);
+INSERT INTO DietPlans VALUES('Nutty', 'Nuts and seeds', 7);
+INSERT INTO DietPlans VALUES('Fruity', 'Fruits and some veggies', 13);
+
+INSERT INTO Animals VALUES('Squirtle', 65, 9, 'Adamant', 1, 1, 'female', 'available', 1, 5, 3);
+INSERT INTO Animals VALUES('Magikarp', 24, 5, 'Jolly', 1, 1, 'male', 'available', 5, 3, 1);
+INSERT INTO Animals VALUES('Ponyta', 670, 12, 'Timid', 0, 1, 'male', 'available', 4, 2, 4);
+INSERT INTO Animals VALUES('Oliphant', 2893, 34, 'Calm', 0, 0, 'female', 'available', 3, 2, 5);
+INSERT INTO Animals VALUES('Spearow', 10, 6, 'Impish', 1, 0, 'female', 'available', 2, 4, 2);
+
+INSERT INTO Rooms VALUES(17, 3);
+INSERT INTO Rooms VALUES(42, 4);
+INSERT INTO Rooms VALUES(13, 2);
+INSERT INTO Rooms VALUES(12, 5);
+INSERT INTO Rooms VALUES(32, NULL);
+INSERT INTO Rooms VALUES(85, NULL);
+INSERT INTO Rooms VALUES(9, NULL);
+INSERT INTO Rooms VALUES(5, 1);
+INSERT INTO Rooms VALUES(71, NULL);
+INSERT INTO Rooms VALUES(24, NULL);
+
+INSERT INTO Clients VALUES('Serafina', 'Jugovac', 'sjugovac', 'secure_password', NULL, 'serafinajugovac@genericmail.com');
+INSERT INTO Clients VALUES('Almas', 'Arnolfi', 'aarnolfi', 'nobodywillguessmypassword', NULL, 'almas@arnolfi.me');
+INSERT INTO Clients VALUES('Leocadia', 'Matheson', 'lmatheson', 'suchpassword', NULL, 'leomath@inlook.com');
+INSERT INTO Clients VALUES('Cam', 'Spijker', 'cspijker', 'verypassword', NULL, 'cams@yeehoo.com');
+INSERT INTO Clients VALUES('Bora', 'Kingston', 'bkingston', 'kingofallpasswords', NULL, 'borabora@kingst.on');
